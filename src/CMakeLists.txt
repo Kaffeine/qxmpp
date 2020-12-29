@@ -209,6 +209,7 @@ if(BUILD_SHARED)
 else()
     add_library(qxmpp STATIC ${SOURCE_FILES})
 endif()
+add_library(QXmpp::QXmpp ALIAS qxmpp)
 
 set_target_properties(qxmpp PROPERTIES
     VERSION ${PROJECT_VERSION}

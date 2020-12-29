@@ -339,7 +339,7 @@ void QXmppIncomingClient::handleStanza(const QDomElement &nodeRecv)
         const QString from = nodeRecv.attribute("from");
         if (!from.isEmpty() && from != d->jid && from != QXmppUtils::jidToBareJid(d->jid)) {
             warning(QString("Received a stanza from unexpected JID %1").arg(from));
-            return;
+            //return;
         }
 
         // process unhandled stanzas

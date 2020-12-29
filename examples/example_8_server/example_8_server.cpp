@@ -28,26 +28,22 @@
 #include <QtCore/QCoreApplication>
 
 #define USERNAME "qxmpp.test1"
-#define PASSWORD "qxmpp123"
+#define PASSWORD "123"
 
 class passwordChecker : public QXmppPasswordChecker
 {
     /// Retrieves the password for the given username.
     QXmppPasswordReply::Error getPassword(const QXmppPasswordRequest &request, QString &password) override
     {
-        if (request.username() == USERNAME) {
-            password = PASSWORD;
-            return QXmppPasswordReply::NoError;
-        } else {
-            return QXmppPasswordReply::AuthorizationError;
-        }
-    };
+        password = PASSWORD;
+        return QXmppPasswordReply::NoError;
+    }
 
     /// Returns true as we implemented getPassword().
     bool hasGetPassword() const override
     {
         return true;
-    };
+    }
 };
 
 int main(int argc, char *argv[])
@@ -71,6 +67,6 @@ int main(int argc, char *argv[])
     server.setLogger(&logger);
     server.setPasswordChecker(&checker);
     server.listenForClients();
-    server.listenForServers();
+    server.listenForServers(QHostAddress(domain));
     return a.exec();
 }
