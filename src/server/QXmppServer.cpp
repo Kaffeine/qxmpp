@@ -652,13 +652,23 @@ bool QXmppServer::sendElement(const QDomElement &element)
 
 bool QXmppServer::sendPacket(const QXmppStanza &packet)
 {
+    return sendPacket(packet, packet.to());
+}
+
+/// Route an XMPP packet to a particular address.
+///
+/// \param packet
+/// \param to
+
+bool QXmppServer::sendPacket(const QXmppStanza &packet, const QString &to)
+{
     // serialize data
     QByteArray data;
     QXmlStreamWriter xmlStream(&data);
     packet.toXml(&xmlStream);
 
     // route data
-    return d->routeData(packet.to(), data);
+    return d->routeData(to, data);
 }
 
 /// Add a new incoming client \a stream.

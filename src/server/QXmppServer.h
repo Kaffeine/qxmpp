@@ -93,7 +93,10 @@ public:
     bool listenForServers(const QHostAddress &address = QHostAddress::Any, quint16 port = 5269);
 
     bool sendElement(const QDomElement &element);
+
+    // Merge those two once ABI breakage allowed
     bool sendPacket(const QXmppStanza &stanza);
+    bool sendPacket(const QXmppStanza &stanza, const QString &to);
 
     void addIncomingClient(QXmppIncomingClient *stream);
 
